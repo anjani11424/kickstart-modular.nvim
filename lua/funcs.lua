@@ -20,6 +20,9 @@ set_indentation('javascript', 2, 2, true)
 set_indentation('html', 2, 2, true)
 
 -- Set indentation for C files
-set_indentation('c', 4, 4, true)
+set_indentation('c', 3, 3, true)
+
+-- Set indentation for Cpp files
+set_indentation('cpp', 3, 3, true)
 
 -- Set indentation for other file types as needed
