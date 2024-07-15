@@ -7,7 +7,7 @@
 vim.opt.number = true
 -- You can also add relative line numbers, to help with jumping.
 --  Experiment for yourself to see if you like it!
--- vim.opt.relativenumber = true
+vim.opt.relativenumber = true
 
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.opt.mouse = 'a'
@@ -57,6 +57,20 @@ vim.opt.inccommand = 'split'
 vim.opt.cursorline = true
 
 -- Minimal number of screen lines to keep above and below the cursor.
-vim.opt.scrolloff = 10
+vim.opt.scrolloff = 999
+vim.opt.sidescrolloff = 999
+
+-- Append '-' to the iskeyword option
+vim.opt.iskeyword:append '-'
+
+-- completion menu will appear even if there is only one match, do not automatically select
+vim.o.completeopt = 'menuone,noselect'
+
+-- Tab key inserts spaces instead of a tab character.
+vim.o.expandtab = true
+
+vim.o.termguicolors = true
+
+vim.o.virtualedit = 'block'
 
 -- vim: ts=2 sts=2 sw=2 et

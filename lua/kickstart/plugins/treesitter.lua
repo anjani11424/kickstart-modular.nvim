@@ -1,11 +1,16 @@
 return {
   { -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
+    dependencies = {
+      'nvim-treesitter/nvim-treesitter-textobjects',
+      'RRethy/nvim-treesitter-textsubjects',
+    },
     build = ':TSUpdate',
     opts = {
-      ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'vim', 'vimdoc' },
+      ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim', 'bash', 'regex' },
       -- Autoinstall languages that are not installed
       auto_install = true,
+      sync_install = false,
       highlight = {
         enable = true,
         -- Some languages depend on vim's regex highlighting system (such as Ruby) for indent rules.
@@ -14,6 +19,84 @@ return {
         additional_vim_regex_highlighting = { 'ruby' },
       },
       indent = { enable = true, disable = { 'ruby' } },
+      incremental_selection = {
+        enable = true,
+        keymaps = {
+          init_selection = 'ss',
+          node_incremental = 'si',
+          scope_incremental = '<leader>sc',
+          node_decremental = 'sd',
+        },
+      },
+      textobjects = {
+        select = {
+          enable = true,
+          lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
+          keymaps = {
+            -- You can use the capture groups defined in textobjects.scm
+            ['af'] = '@function.outer',
+            ['if'] = '@function.inner',
+            ['at'] = '@class.outer',
+            ['it'] = '@class.inner',
+            ['ac'] = '@call.outer',
+            ['ic'] = '@call.inner',
+            ['aa'] = '@parameter.outer',
+            ['ia'] = '@parameter.inner',
+            ['al'] = '@loop.outer',
+            ['il'] = '@loop.inner',
+            ['ai'] = '@conditional.outer',
+            ['ii'] = '@conditional.inner',
+            ['a/'] = '@comment.outer',
+            ['i/'] = '@comment.inner',
+            ['ab'] = '@block.outer',
+            ['ib'] = '@block.inner',
+            ['as'] = '@statement.outer',
+            ['is'] = '@scopename.inner',
+            ['aA'] = '@attribute.outer',
+            ['iA'] = '@attribute.inner',
+            ['aF'] = '@frame.outer',
+            ['iF'] = '@frame.inner',
+          },
+        },
+        move = {
+          enable = true,
+          set_jumps = true, -- whether to set jumps in the jumplist
+          goto_next_start = {
+            [']m'] = '@function.outer',
+            [']]'] = '@class.outer',
+          },
+          goto_next_end = {
+            [']M'] = '@function.outer',
+            [']['] = '@class.outer',
+          },
+          goto_previous_start = {
+            ['[m'] = '@function.outer',
+            ['[['] = '@class.outer',
+          },
+          goto_previous_end = {
+            ['[M'] = '@function.outer',
+            ['[]'] = '@class.outer',
+          },
+        },
+        swap = {
+          enable = true,
+          swap_next = {
+            ['<leader>a'] = '@parameter.inner',
+          },
+          swap_previous = {
+            ['<leader>A'] = '@parameter.inner',
+          },
+        },
+      },
+      textsubjects = {
+        enable = true,
+        prev_selection = ',', -- (Optional) keymap to select the previous selection
+        keymaps = {
+          ['.'] = 'textsubjects-smart',
+          [';'] = 'textsubjects-container-outer',
+          ['i;'] = { 'textsubjects-container-inner', desc = 'Select inside containers (classes, functions, etc.)' },
+        },
+      },
     },
     config = function(_, opts)
       -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
