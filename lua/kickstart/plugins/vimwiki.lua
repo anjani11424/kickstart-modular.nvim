@@ -17,7 +17,7 @@ return {
 
       local wk = require 'which-key'
       wk.add {
-        { '<leader>ws', '<cmd>VimwikiSearch<cr>', desc = 'Search in vim wiki' },
+        { '<leader>ws', ':VimwikiSearch ', desc = 'Search in vim wiki' },
       }
     end,
   },
