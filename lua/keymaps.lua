@@ -48,4 +48,34 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
+-- Function to get the base repository path
+local function get_git_repo_path(file_path)
+  -- Try to find the base of the git repo
+  local git_cmd = io.popen('git -C ' .. file_path .. ' rev-parse --show-toplevel 2> /dev/null')
+  if git_cmd then
+    local git_path = git_cmd:read '*l' -- Read the output from git command
+    git_cmd:close()
+    if git_path and git_path ~= '' then
+      return git_path
+    end
+  end
+  return nil
+end
+
+-- Function to change directory to the Git repo root
+_G.change_to_git_repo = function()
+  local current_file_path = vim.fn.expand '%:p:h'
+  local repo_path = get_git_repo_path(current_file_path)
+  if repo_path then
+    vim.cmd('cd ' .. repo_path)
+    print('Changed directory to: ' .. repo_path)
+  else
+    print 'Not inside a Git repository'
+  end
+end
+
+vim.api.nvim_set_keymap('n', '<leader>.', ':lua change_to_git_repo()<CR>', { noremap = true, silent = true })
+
+-- Keymap for <leader>. to change directory to Git repo root
+
 -- vim: ts=2 sts=2 sw=2 et

@@ -22,6 +22,8 @@ return {
           map('n', 'mn', bm.bookmark_next) -- jump to next mark in local buffer
           map('n', 'mp', bm.bookmark_prev) -- jump to previous mark in local buffer
           map('n', 'ma', bm.bookmark_list) -- show marked file list in quickfix window
+          map('n', 'mx', bm.bookmark_clear_all) -- removes all bookmarks
+
           -- map("n","mk",bm.bookmark_list_local) -- show marked file list in quickfix window
         end,
       }
