@@ -74,6 +74,13 @@ _G.change_to_git_repo = function()
   end
 end
 
+local virtual_text = true
+function _G.toggle_virtual_text()
+  virtual_text = not virtual_text
+  vim.diagnostic.config { virtual_text = virtual_text }
+end
+
+vim.api.nvim_set_keymap('n', '<leader>vt', ':lua toggle_virtual_text()<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>.', ':lua change_to_git_repo()<CR>', { noremap = true, silent = true })
 
 -- Keymap for <leader>. to change directory to Git repo root
