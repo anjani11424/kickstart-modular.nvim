@@ -82,6 +82,11 @@ end
 
 vim.api.nvim_set_keymap('n', '<leader>vt', ':lua toggle_virtual_text()<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>.', ':lua change_to_git_repo()<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', 'date', 'i<C-R>=strftime(" %d-%m-%Y %a %I:%M %p ")<CR>', { desc = 'date puts curent date' })
+vim.api.nvim_set_keymap('n', 'time', 'i<C-R>=strftime("%I:%M %p : ")<CR>', { desc = 'time puts curent time' })
+vim.api.nvim_set_keymap('n', 'datee', 'i<C-R>=strftime("## %d-%m-%Y %a %I:%M %p [%Y-%m-%d](diary/%Y-%m-%d)")<CR>', { desc = 'date puts curent date' })
+vim.api.nvim_set_keymap('n', 'code', 'i<C-R>````<CR>', { desc = 'code opens code section in md' })
+vim.api.nvim_set_keymap('n', 'log', 'i<C-R>(/Users/anjani.kumar/logs/', { desc = 'log file added' })
 
 -- Keymap for <leader>. to change directory to Git repo root
 
